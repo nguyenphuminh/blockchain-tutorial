@@ -31,7 +31,21 @@ class Block {
     }
 
     hasValidTransactions(chain) {
-        return this.data.every(transaction => transaction.isValid(transaction, chain));
+        let gas = 0, reward = 0;
+
+        this.data.forEach(transaction => {
+            if (transaction.from !== MINT_PUBLIC_ADDRESS) {
+                gas += transaction.gas;
+            } else {
+                reward = transaction.amount;
+            }
+        });
+
+        return (
+            reward - gas === chain.reward &&
+            this.data.every(transaction => transaction.isValid(transaction, chain)) && 
+            this.data.filter(transaction => transaction.from === MINT_PUBLIC_ADDRESS).length === 1
+        );
     }
 }
 
