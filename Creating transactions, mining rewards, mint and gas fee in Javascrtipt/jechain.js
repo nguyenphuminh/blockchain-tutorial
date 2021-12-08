@@ -122,7 +122,7 @@ class Blockchain {
             if (
                 currentBlock.hash !== currentBlock.getHash() || 
                 prevBlock.hash !== currentBlock.prevHash || 
-                currentBlock.hasValidTransactions(blockchain)
+                !currentBlock.hasValidTransactions(blockchain)
             ) {
                 return false;
             }
