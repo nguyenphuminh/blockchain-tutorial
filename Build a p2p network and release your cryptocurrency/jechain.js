@@ -20,7 +20,7 @@ class Block {
     }
 
     mine(difficulty) {
-        while (!this.hash.startsWith("000" + Array(Math.round(Math.log(difficulty) / Math.log(16) + 1)).join("0"))) {
+        while (!this.hash.startsWith(Array(difficulty + 1).join("0"))) {
             this.nonce++;
             this.hash = Block.getHash(this);
         }
