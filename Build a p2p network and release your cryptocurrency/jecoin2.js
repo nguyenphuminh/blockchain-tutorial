@@ -123,7 +123,7 @@ server.on("connection", async (socket, req) => {
                 if (!finished) {
                     tempChain.chain.push(block);
                 } else {
-		    tempChain.chain.push(block);
+                    tempChain.chain.push(block);
                     if (Blockchain.isValid(tempChain)) {
                         JeChain.chain = tempChain.chain;
                     }
@@ -131,7 +131,6 @@ server.on("connection", async (socket, req) => {
                 }
 
                 break;
-
 
             case "TYPE_REQUEST_CHAIN":
                 const socket = opened.filter(node => node.address === _message.data)[0].socket;
@@ -149,10 +148,10 @@ server.on("connection", async (socket, req) => {
                 break;
 
             case "TYPE_REQUEST_INFO":
-                opened.filter(node => node.address === _message.data)[0].socket.send(
+                opened.filter(node => node.address === _message.data)[0].socket.send(JSON.stringify(produceMessage(
                     "TYPE_SEND_INFO",
                     [JeChain.difficulty, JeChain.transactions]
-                );
+                )));
 
                 break;
 
