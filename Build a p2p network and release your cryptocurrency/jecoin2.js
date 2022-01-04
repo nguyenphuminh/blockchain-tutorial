@@ -123,6 +123,7 @@ server.on("connection", async (socket, req) => {
                 if (!finished) {
                     tempChain.chain.push(block);
                 } else {
+		    tempChain.chain.push(block);
                     if (Blockchain.isValid(tempChain)) {
                         JeChain.chain = tempChain.chain;
                     }
